@@ -1,13 +1,16 @@
 @import "tailwindcss";
 @font-face {
-    font-family: 'HoneyNotes';
-    src: url("./assets/HoneyNotesRegular-1GR8e.ttf");
+  font-family: "HoneyNotes";
+  src: url("./assets/HoneyNotesRegular-1GR8e.ttf");
 }
-body{
-    font-family: 'Handlee', cursive;
-    background: linear-gradient(to bottom right, #fee2e2, #cffafe);
-    background-repeat: no-repeat;
+html,
+body {
+  font-family: "Handlee", cursive;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+   background: linear-gradient(to bottom right, #fee2e2, #cffafe);
 }
 .font-honey {
-    font-family: 'HoneyNotes', cursive;
+  font-family: "HoneyNotes", cursive;
 }

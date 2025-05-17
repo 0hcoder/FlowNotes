@@ -26,7 +26,7 @@ const CreateNote = ({ addNotes }) => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[antiquewhite] p-4">
+    <div className="h-[calc(100vh -16px)] w-full flex items-center justify-center p-4">
       <div className="w-full max-w-3xl bg-gray-200 rounded-xl shadow-md p-6">
         <h1 className="text-3xl font-semibold mb-6 text-center">Create Note</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
