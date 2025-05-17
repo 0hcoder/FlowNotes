@@ -1,15 +1,29 @@
-import {BrowserRouter as Router , Routes, Route} from 'react-router-dom'
-import Home from './pages/Home';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import CreateNote from "./pages/CreateNote";
+import Nav from "./components/Nav";
+import { useState } from "react";
 const App = () => {
-  return <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/about" element={<h1>About</h1>} />
-        <Route path="/contact" element={<h1>Contact</h1>} />
+  const [notes, setNotes] = useState([]);
+
+  const handleAddNote = (newNote) => {
+    setNotes((prev) => [...prev, newNote]);
+  };
+  
+  return (
+    <div className="relative">
+      <Router>
+       <Nav />
+        <Routes>
+          <Route path="/" element={<Home notes={notes} />} />
+          <Route
+            path="/create/note"
+            element={<CreateNote addNotes={handleAddNote} />}
+          />
         </Routes>
-    </Router>
-  </>;
+      </Router>
+    </div>
+  );
 };
 
 export default App;

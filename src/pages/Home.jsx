@@ -1,10 +1,14 @@
-import React from 'react'
-import LoadingScreen from '../components/LoadingScreen'
+import HomeComp from "../components/HomeComp";
+import LoadingScreen from "../components/LoadingScreen";
 
-const Home = () => {
+
+const Home = ({notes}) => {
+  
   return (
-    <div className='w-full h-screen bg-gray-400'><LoadingScreen/></div>
-  )
-}
+    <div className="">
+      <HomeComp notes={notes} />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
