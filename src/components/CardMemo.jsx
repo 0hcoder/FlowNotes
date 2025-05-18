@@ -1,10 +1,10 @@
-import React from "react";
+import { MdDeleteForever } from "react-icons/md";
 
-const CardMemo = ({ note }) => {
+const CardMemo = ({ note,onDelete }) => {
   return (
     <div className="max-w-[350px] min-w-[300px] w-full mx-auto mb-6">
       <div
-        className="relative flex justify-center items-center rotate-[10deg] origin-top-left shadow-[3px_3px_2px_#c9bf8d] px-6 py-5"
+        className="relative flex justify-center items-center rotate-[10deg] origin-top-left shadow-[3px_3px_2px_#c9bf8d] px-6 py-5 group"
         style={{
           background: "linear-gradient(135deg, #e5c93d 30%, #ffed87)",
           borderRadius: "8px",
@@ -13,6 +13,10 @@ const CardMemo = ({ note }) => {
           wordBreak: "break-word",
         }}
       >
+        <MdDeleteForever
+                    className="absolute top-1 right-1 z-10 text-red-600 w-3.5 h-3.5 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:text-red-500"
+                    onClick={onDelete}
+                  />
         {/* Pin */}
         <div className="absolute left-5 top-0 w-[60px] h-[50px]">
           <div

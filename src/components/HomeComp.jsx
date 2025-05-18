@@ -1,17 +1,21 @@
 import { useRef, useState } from "react";
 import Draggable from "react-draggable";
-import CardQuickBlip from "./CardQuickBlip";
-import CardOneLiner from "./CardOneLiner";
-import CardReflection from "./CardReflection";
-import CardMemo from "./CardMemo";
-import CreateNote from "../pages/CreateNote";
-import DraggableCardWrapper from "./DraggableCardWrapper";
-import { Link, useNavigate } from "react-router-dom";
 import { MdNoteAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
+import CardMemo from "./CardMemo";
+import CardOneLiner from "./CardOneLiner";
+import CardQuickBlip from "./CardQuickBlip";
+import CardReflection from "./CardReflection";
 
 const HomeComp = () => {
   const storedNotes = JSON.parse(localStorage.getItem("NewNotes")) || [];
-  const [activeIndex, setActiveIndex] = useState(null); // Track active card index
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const handleDelete = (deleteIndex) => {
+    const updatedNotes = storedNotes.filter((_, index) => index !== deleteIndex);
+    localStorage.setItem("NewNotes", JSON.stringify(updatedNotes));
+    window.location.reload();
+  };
 
   if (storedNotes.length === 0)
     return (
@@ -21,14 +25,14 @@ const HomeComp = () => {
           <Link to="/create/note">
             <MdNoteAdd className="text-green-400 text-9xl cursor-pointer" />
           </Link>
-
+          <span className="absolute left-1/2 -translate-x-1/2 bottom-[-36px] scale-0 group-hover:scale-100 transition-all duration-200 bg-[#6ae066] opacity-[0.9] text-white text-sm rounded px-3 py-1 whitespace-nowrap z-10">
+            Create Note
+          </span>
         </div>
 
         <h1 className="text-3xl font-semibold mt-4">Create Your First Note</h1>
         <p className="text-gray-500 mt-2">Click the icon above to start!</p>
-        <p className="text-gray-500 mt-2">
-          Drag and drop to move notes around.
-        </p>
+        <p className="text-gray-500 mt-2">Drag and drop to move notes around.</p>
       </div>
     );
 
@@ -39,7 +43,7 @@ const HomeComp = () => {
   };
 
   return (
-    <div className="w-full min-h-screen relative overflow-x-hidden pt-10">
+    <div className="w-full min-h-screen relative overflow-x-hidden pt-[72px]">
       {storedNotes.map((note, index) => {
         const CardComponent = {
           blip: CardQuickBlip,
@@ -58,31 +62,33 @@ const HomeComp = () => {
             nodeRef={cardRef}
             bounds={{
               left: 0,
-              top: 36,
+              top: 5,
               right: window.innerWidth - 150,
               bottom: 9999,
             }}
             defaultPosition={{ x: note.x || 0, y: note.y || 0 }}
             onStop={(e, data) => {
               updateNotePosition(index, data.x, data.y);
-              setActiveIndex(index); // Also set active on drag stop
+              setActiveIndex(index);
             }}
             onStart={() => {
-              setActiveIndex(index); // Set active when dragging starts
+              setActiveIndex(index);
             }}
           >
-            <DraggableCardWrapper
+            <div
               ref={cardRef}
-              onClick={() => setActiveIndex(index)} // Set active on click
+              onClick={() => setActiveIndex(index)}
               style={{
-                zIndex: activeIndex === index ? 100 : 1, // High z-index for active card
-                position: "absolute", // Make sure positioned for zIndex to work
+                zIndex: activeIndex === index ? 100 : 1,
+                position: "absolute",
               }}
             >
               <div className="cursor-move">
-                <CardComponent note={note} />
+                <CardComponent note={note} onDelete={() => handleDelete(index)} />
+                 
+
               </div>
-            </DraggableCardWrapper>
+            </div>
           </Draggable>
         );
       })}

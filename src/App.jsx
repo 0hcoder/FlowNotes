@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import CreateNote from "./pages/CreateNote";
-import Nav from "./components/Nav";
 import { useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Nav from "./components/Nav";
+import CreateNote from "./pages/CreateNote";
+import Home from "./pages/Home";
 
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   const [notes, setNotes] = useState([]);
 
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden">
       <Router>
-       <Nav />
+       <Nav setNotes={setNotes} />
         <Routes>
           <Route path="/" element={<Home notes={notes} />} />
           <Route

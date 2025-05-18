@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { MdLayersClear, MdNoteAdd } from "react-icons/md";
 import gsap from "gsap";
+import { useEffect, useRef } from "react";
+import { MdLayersClear, MdNoteAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Nav = () => {
