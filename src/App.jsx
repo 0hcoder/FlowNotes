@@ -11,7 +11,7 @@ const App = () => {
   };
   
   return (
-    <div className="relative">
+    <div className="relative w-full min-h-screen overflow-x-hidden">
       <Router>
        <Nav />
         <Routes>

@@ -2,47 +2,26 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateNote = ({ addNotes }) => {
-  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
-  const saveNote = () => {
-    const newNote = { title, content, category };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newNote = { content, category };
     const existingNotes = JSON.parse(localStorage.getItem("NewNotes")) || [];
     const updatedNotes = [...existingNotes, newNote];
     localStorage.setItem("NewNotes", JSON.stringify(updatedNotes));
-    setTitle("");
     setContent("");
     setCategory("");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newNote = { title, content, category };
-    addNotes(newNote);
-    saveNote();
     navigate("/");
   };
 
   return (
-    <div className="h-[calc(100vh -16px)] w-full flex items-center justify-center p-4">
+    <div className="h-[calc(100vh-16px)] w-full flex items-center justify-center p-4">
       <div className="w-full max-w-3xl bg-gray-200 rounded-xl shadow-md p-6">
         <h1 className="text-3xl font-semibold mb-6 text-center">Create Note</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <div className="flex flex-col">
-            <label htmlFor="title" className="mb-1 font-medium">Title</label>
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="bg-gray-300 p-3 text-lg rounded-lg outline-none"
-              type="text"
-              id="title"
-              name="title"
-              required
-            />
-          </div>
-
           <div className="flex flex-col">
             <label htmlFor="content" className="mb-1 font-medium">Content</label>
             <textarea

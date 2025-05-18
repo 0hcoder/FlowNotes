@@ -12,18 +12,24 @@ import { MdNoteAdd } from "react-icons/md";
 const HomeComp = () => {
   const storedNotes = JSON.parse(localStorage.getItem("NewNotes")) || [];
   const [activeIndex, setActiveIndex] = useState(null); // Track active card index
-  const navigate = useNavigate();
 
   if (storedNotes.length === 0)
     return (
-     <div className="flex flex-col items-center justify-center h-screen">
-       <Link to={"/create/note"}>
-        <MdNoteAdd className="text-green-400 text-9xl" />
-      </Link>
-      <h1 className="text-3xl font-semibold mt-4">Create Your First Note</h1>
-      <p className="text-gray-500 mt-2">Click the icon above to start!</p>
-      <p className="text-gray-500 mt-2">Drag and drop to move notes around.</p>
-     </div>
+      <div className="max-h-[999px] min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-5xl font-semibold mb-4">Welcome to FlowNotes</h1>
+        <div className="relative group inline-block">
+          <Link to="/create/note">
+            <MdNoteAdd className="text-green-400 text-9xl cursor-pointer" />
+          </Link>
+
+        </div>
+
+        <h1 className="text-3xl font-semibold mt-4">Create Your First Note</h1>
+        <p className="text-gray-500 mt-2">Click the icon above to start!</p>
+        <p className="text-gray-500 mt-2">
+          Drag and drop to move notes around.
+        </p>
+      </div>
     );
 
   const updateNotePosition = (index, x, y) => {
@@ -52,7 +58,7 @@ const HomeComp = () => {
             nodeRef={cardRef}
             bounds={{
               left: 0,
-              top: 0,
+              top: 36,
               right: window.innerWidth - 150,
               bottom: 9999,
             }}
