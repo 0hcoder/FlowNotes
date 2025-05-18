@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreateNote = ({ addNotes }) => {
   const [content, setContent] = useState("");
@@ -14,6 +15,18 @@ const CreateNote = ({ addNotes }) => {
     localStorage.setItem("NewNotes", JSON.stringify(updatedNotes));
     setContent("");
     setCategory("");
+   toast.success("Note created successfully!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  
+
     navigate("/");
   };
 
