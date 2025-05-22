@@ -114,11 +114,3 @@ Contact
 Created by Ankit Rawat as a Hackathon project. Feel free to reach out for questions or suggestions.
 
 Thank you for checking out FlowNotes! Happy note-taking! 🚀
-
-yaml
-Copy
-Edit
-
----
-
-If you want me to help format or add badges/screenshots later, just ask!
